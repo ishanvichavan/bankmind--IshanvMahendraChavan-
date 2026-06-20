@@ -1,66 +1,88 @@
 # bankmind-[IshanviMahendraChavan]
 
-# Bank Deposit Prediction Engine & Live Explanation Routing Pipeline
+## Bank Deposit Prediction Engine & Live Explanation Routing Pipeline
 
 This repository hosts an end-to-end machine learning inference pipeline built using an optimized scikit-learn Random Forest model integrated with an enterprise FastAPI gateway and live Llama-3.3 natural language generation layers via Groq.
 
 ---
 
-## PART 1: How to Set Up and Run the Project
+## Part 1: How to Set Up and Run the Project
 
-Follow these consecutive deployment steps to clear your environment cache, extract assets, and launch the local production server kernel.
+Follow these steps to install dependencies, configure credentials, and launch the local server.
 
-### Step 1: Install System Dependencies
+### Step 1: Install Dependencies
 
-> ⚠️ **IMPORTANT REQUIRED STEP:** Due to GitHub file size limitations, you must download the trained model binary `bank_model.pkl` from [This Google Drive Link](https://drive.google.com/file/d/1XE2-j9askzmLlOLuMKE7EojMTNbyFoLM/view?usp=sharing) and place it directly into the **root directory** of this project repository before starting the Uvicorn application server.
+> ⚠️ **Required:** Due to GitHub file size limits, download the trained model binary `bank_model.pkl` from [this Google Drive link](https://drive.google.com/file/d/1XE2-j9askzmLlOLuMKE7EojMTNbyFoLM/view?usp=sharing) and place it in the **root directory** of this project before starting the server.
+>
+> **Before doing this:** treat any `.pkl` file from a link you don't control as untrusted. `pickle.load()` can execute arbitrary code on your machine. Verify the source/owner of this link before downloading, or ask them to provide the model in a safer format (e.g. ONNX, or weights as JSON).
 
-Ensure you have **Python** installed on your local machine. Open your terminal inside your local project directory and execute:
+Make sure Python is installed, then from the project root run:
 
 ```bash
 pip install -r requirements.txt
+```
 
-Step 2: Configure System Environment Credentials
+### Step 2: Configure Environment Credentials
 
-To allow live Llama-3.3 evaluation narrative compilation, pass your Groq developer key to your environment variables matrix:
+To enable live Llama-3.3 explanation generation, set your Groq API key as an environment variable.
 
-* **On Git Bash / Linux / macOS:**
+**Git Bash / Linux / macOS:**
 ```bash
-  export GROQ_API_KEY="your_actual_api_key_here"
+export GROQ_API_KEY="your_actual_api_key_here"
+```
 
-On Windows (Command Prompt - cmd):
+**Windows (cmd):**
+```cmd
+set GROQ_API_KEY=your_actual_api_key_here
+```
+
+**Windows (PowerShell):**
+```powershell
 $env:GROQ_API_KEY="your_actual_api_key_here"
+```
 
-(Note: If no explicit key configuration occurs, the core prediction models will automatically fallback gracefully to baseline internal text parameters).
+> 💡 **Note:** If no key is set, the app falls back to baseline internal text generation instead of live LLM calls.
 
-Step 3: Boot the Live Uvicorn Application Server
+### Step 3: Start the Server
 
-Start up your local gateway application by running the executable module flag directly inside your terminal session (ensuring your path is set to the project root):
+From the project root, run:
 
+```bash
 python -m uvicorn main:app --reload
+```
 
-Once your console logs initialize successfully, you can view the fully dynamic and interactive GUI OpenAPI system dashboard by navigating to: http://127.0.0.1:8000/docs
+Once the server starts, view the interactive API docs at:
+**http://127.0.0.1:8000/docs**
 
-PART 2: System API Endpoints & Working cURL Usage Examples
-Keep your primary server terminal window running and open a brand-new secondary command line window to fire and validate these backend operations using standard curl formatting requests.
+---
 
-1. System Health & Diagnostic Verification (GET /health)
-Verifies if your application layer is active and checks whether the machine learning binary array has been safely loaded into memory.
+## Part 2: API Endpoints & Example Usage
 
-Bash
-curl -X 'GET' '[http://127.0.0.1:8000/health](http://127.0.0.1:8000/health)' -H 'accept: application/json'
-Expected JSON Output Response:
+Keep the server running in one terminal, and use a second terminal to test these endpoints with `curl`.
 
-JSON
+### 1. Health Check — `GET /health`
+
+Checks that the app is running and the model loaded successfully.
+
+```bash
+curl -X 'GET' 'http://127.0.0.1:8000/health' -H 'accept: application/json'
+```
+
+**Example response:**
+```json
 {
   "status": "ok",
   "model": "RandomForestClassifier-TrackC"
 }
-2. High-Velocity Acquisition Prediction (POST /predict)
-Processes a validated consumer data profile payload and returns localized probabilities, conversion state flags, and primary driving customer features.
+```
 
-Bash
+### 2. Predict — `POST /predict`
+
+Takes a customer profile and returns subscription probability and top contributing factors.
+
+```bash
 curl -X 'POST' \
-  '[http://127.0.0.1:8000/predict](http://127.0.0.1:8000/predict)' \
+  'http://127.0.0.1:8000/predict' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -81,9 +103,10 @@ curl -X 'POST' \
   "previous": 0,
   "poutcome": "unknown"
 }'
-Expected JSON Output Response:
+```
 
-JSON
+**Example response:**
+```json
 {
   "will_subscribe": true,
   "probability": 0.83,
@@ -92,12 +115,15 @@ JSON
     "absence of active housing debt obligations"
   ]
 }
-3. Generative Conversational Pitch Briefings (POST /explain)
-Routes numerical baseline insights directly through a Llama-3.3 LLM instance on the Groq platform to synthesize plain-text conversation strategies for bank personnel.
+```
 
-Bash
+### 3. Explain — `POST /explain`
+
+Routes prediction results through a Llama-3.3 model (via Groq) to generate a plain-language pitch summary for bank staff.
+
+```bash
 curl -X 'POST' \
-  '[http://127.0.0.1:8000/explain](http://127.0.0.1:8000/explain)' \
+  'http://127.0.0.1:8000/explain' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -118,9 +144,10 @@ curl -X 'POST' \
   "previous": 0,
   "poutcome": "unknown"
 }'
-Expected JSON Output Response (With Active Key Configured):
+```
 
-JSON
+**Example response (with key configured):**
+```json
 {
   "prediction_metrics": {
     "will_subscribe": true,
@@ -132,5 +159,6 @@ JSON
   },
   "llm_explanation": "This customer shows high conversion intent due to an extensive phone conversation duration and a strong cash reserve balance ($3500). The Relationship Manager should pitch by emphasizing safety and premium asset allocation, highlighting the absolute absence of conflicting debt obligations."
 }
+```
 
 
