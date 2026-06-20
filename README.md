@@ -14,8 +14,6 @@ Follow these steps to install dependencies, configure credentials, and launch th
 
 > ⚠️ **Required:** Due to GitHub file size limits, download the trained model binary `bank_model.pkl` from [this Google Drive link](https://drive.google.com/file/d/1XE2-j9askzmLlOLuMKE7EojMTNbyFoLM/view?usp=sharing) and place it in the **root directory** of this project before starting the server.
 >
-> **Before doing this:** treat any `.pkl` file from a link you don't control as untrusted. `pickle.load()` can execute arbitrary code on your machine. Verify the source/owner of this link before downloading, or ask them to provide the model in a safer format (e.g. ONNX, or weights as JSON).
-
 Make sure Python is installed, then from the project root run:
 
 ```bash
