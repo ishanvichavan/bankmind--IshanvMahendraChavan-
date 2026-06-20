@@ -1,5 +1,7 @@
 # bankmind-[IshanviMahendraChavan]
 
+**Live Demo:** View is project on hugging face spaces (https://huggingface.co/spaces/ishanvichavan/bankmind-ishanvi)
+
 ## Bank Deposit Prediction Engine & Live Explanation Routing Pipeline
 
 This repository hosts an end-to-end machine learning inference pipeline built using an optimized scikit-learn Random Forest model integrated with an enterprise FastAPI gateway and live Llama-3.3 natural language generation layers via Groq.
@@ -12,7 +14,7 @@ Follow these steps to install dependencies, configure credentials, and launch th
 
 ### Step 1: Install Dependencies
 
-> ⚠️ **Required:** Due to GitHub file size limits, download the trained model binary `bank_model.pkl` from [this Google Drive link](https://drive.google.com/file/d/1XE2-j9askzmLlOLuMKE7EojMTNbyFoLM/view?usp=sharing) and place it in the **root directory** of this project before starting the server.
+> ⚠️ **Required:** Due to GitHub file size limits, download the trained model binary `bank_model.pkl` from this Google Drive link (https://drive.google.com/file/d/1XE2-j9askzmLlOLuMKE7EojMTNbyFoLM/view?usp=sharing) and place it in the **root directory** of this project before starting the server.
 >
 Make sure Python is installed, then from the project root run:
 
