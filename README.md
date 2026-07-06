@@ -1,6 +1,6 @@
 # bankmind-[IshanviMahendraChavan] TRACK C
 
-**Live Demo:** View is project on hugging face spaces (https://huggingface.co/spaces/ishanvichavan/bankmind-ishanvi)
+**Live Demo:** View this project on hugging face spaces (https://huggingface.co/spaces/ishanvichavan/bankmind-ishanvi)
 
 ## Bank Deposit Prediction Engine & Live Explanation Routing Pipeline
 
